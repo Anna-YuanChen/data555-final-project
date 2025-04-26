@@ -1,28 +1,13 @@
 ---
-title: "DATA 555 Interactive Visualization"
-author: "Yuan (Anna) Chen"
-output: html_document
+title: "DATA 555 Final Project"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
-# Interactive Visualization using Plotly() and DT()
+# Main Dashboard
 
-This project examines the **power and performance of Likelihood Ratio (LR) and Wald tests** under a logistic regression-based **coincidence paradigm** for binary outcomes. The dataset consists of **90 clinical patients**, analyzing how **age, sex, and treatment duration** influence **relapse outcomes**.
-
-### Dashboard aims or research questions investigated:
-
-#### 1. How does age impact relapse rates?
-
-#### 2. How does treatment duration vary by relapse status?
-
-#### 3. Is there a relationship between sex and relapse status?
-
-#### 4. Can we identify an age threshold where relapse risk significantly increases?
-
-#### 5. Filterable Search tool: Users can find information for individual patient information.
-
-Understanding the relationship between age, sex, and treatment outcomes is valuable for clinicians optimizing treatment strategies, researchers studying relapse risk factors, and policymakers evaluating healthcare interventions.
-
-Two interactive exploratory data analysis graphs are presented: A side-by-side boxplot illustrating the relationship between age and relapse status, further distinguished by sex (Male/Female) using color coding. Also, a scatter plot showing the relationship between age and treatment duration (years), with additional context provided by color coding each data point based on relapse status (Yes/No). Additionally, a sortable and searchable data table using DT() is displayed below, allowing for interactive exploration of individual patient details.
 
 ```{r setup, include=FALSE}
 library(ggplot2)
@@ -32,17 +17,11 @@ library(DT)
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-```{r load-data}
-# Load dataset
-data <- read.csv("/Users/annachen/Desktop/semester 4/DATA 555/sex_age_data.csv")
-
-# Summary statistics
-summary(data)
-```
 
 ## **Side by Side Boxplot: Age Distribution by Relapse Status (Plotly)**
 
 ```{r boxplot-relapse, echo=FALSE}
+data <- read.csv("/Users/annachen/Desktop/semester 4/DATA 555/sex_age_data.csv")
 data$relapse <- factor(data$relapse, labels = c("No Relapse", "Relapse"))
 data$sex <- factor(data$sex, labels = c("Female", "Male"))
 
@@ -66,6 +45,10 @@ ggplotly(p1, tooltip = "text")
 - The **distribution of male and female patients within relapse groups** is clearly distinguishable.
 - **Jitter points show individual patient details** when hovered over.
 
+### **Real-World Impact and Importance of Dashboard**
+
+- Understanding relapse patterns by age and gender can inform more personalized follow-up treatment plans.
+- This tool enables interactive exploration of patient subgroups to support data-driven healthcare decisions.
 
 
 ## **Scatter Plot: Age vs. Treatment Duration (Plotly)**
@@ -92,35 +75,26 @@ ggplotly(p2, tooltip = "text")
 - **Hover tooltips display patient-specific information**.
 
 
+### **View Source Code on GitHub**
 
-## **An interactive data table created from DT()**
-
-```{r datatable, echo=FALSE}
-data_table <- data %>%
-  rename(
-    "Sex" = sex,
-    "Age (years)" = age,
-    "Treatment Duration (years)" = duration,
-    "Relapse Status of Cancer" = relapse
-  )
-
-DT::datatable(data_table, options = list(
-  pageLength = 10,
-  autoWidth = TRUE,
-  searching = TRUE,
-  dom = 'Blfrtip',
-  columnDefs = list(
-    list(className = 'dt-center', targets = c(1,2,3,4)),
-    list(orderable = TRUE, targets = '_all')
-  )
-),
-rownames = FALSE,
-filter = "top")
-```
+https://github.com/Anna-YuanChen/data555-final-project/
 
 
 
 
+
+
+
+
+
+# Dataset Description
+
+The dataset comprises clinical data from 90 patients, containing demographic and treatment-related variables to investigate how age, sex, and treatment duration influence relapse outcomes.
+
+- Data Source: Patient records with demographic and treatment-related information. Collecting from the BIOS 509 course material.
+- Sample Size: 90 individuals.
+- Data Collection Method: Extracted from clinical observations, recording age, sex, treatment duration, and relapse status.
+- Timeframe & Population: Data reflects patients undergoing treatment, with relapse status recorded as a key outcome.
 
 
 
