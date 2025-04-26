@@ -8,7 +8,7 @@ The dashboard visualizes age and gender differences in cancer relapse patterns u
 - `index.Rmd`: The R Markdown source code.
 
 ## Live Dashboard
-👉 [Click here to view the dashboard](https://Anna-YuanChen.github.io/data555-final-project/)
+👉 [Click here to view the dashboard](https://anna-yuanchen.github.io/data555-final-project/)
 
 ## About
 This dashboard explores the relationship between age, gender, and cancer relapse status.  
